@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: cloudbees/checkout@v2
+        with:
+          provider: ${{ cloudbees.scm.GitHub }}
+          repository: ${{ MZuleima.ciber4 }}
         run: |
           if [ -f prueba.java ]; then
             echo "El archivo prueba.java existe en el repositorio."
