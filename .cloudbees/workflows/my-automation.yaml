@@ -15,6 +15,7 @@ jobs:
         with:
           provider: ${{ cloudbees.scm.GitHub }}
           repository: ${{ MZuleima.ciber4 }}
+          ref: main
         run: |
           if [ -f prueba.java ]; then
             echo "El archivo prueba.java existe en el repositorio."
