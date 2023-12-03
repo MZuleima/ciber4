@@ -1,0 +1,21 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: My automation
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    steps:
+      - name: Checkout Repository
+        uses: cloudbees/checkout@v2
+        run: |
+          if [ -f prueba.java ]; then
+            echo "El archivo prueba.java existe en el repositorio."
+          else
+            echo "Error: No se encontró el archivo prueba.java en el repositorio."
+            exit 1
+          fi
