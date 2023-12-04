@@ -6,14 +6,43 @@ on:
   push:
     branches:
       - '**'
-jobs:
-  build:
-    steps:
-      - name: Checkout Repository
-        uses: cloudbees/checkout@v2
-        with:
-          repository: MZuleima/ciber4
-          token: ${{ secrets.MI_TOKEN_GITHUB }}
 
+jobs:
+  check_code:
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Descargar y configurar Checkstyle
         run: |
-          ls -al
+          wget https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.47/checkstyle-8.47-all.jar
+          echo "java -jar checkstyle-8.47-all.jar -c sun_checks.xml ./**/*.java" > checkstyle.sh
+          chmod +x checkstyle.sh
+
+      - name: Ejecutar Checkstyle
+        run: ./checkstyle.sh
+
+  run_tests:
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Compilar y ejecutar pruebas con JUnit
+        run: |
+          javac -cp ./**/*.java
+          java -cp .:junit-platform-console-standalone-1.7.2.jar:apiguardian-api-1.1.1.jar org.junit.platform.console.ConsoleLauncher --scan-classpath
+
