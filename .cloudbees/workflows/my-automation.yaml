@@ -14,6 +14,7 @@ jobs:
         uses: cloudbees/checkout@v2
         with:
           provider: github
-          repository: MZuleima/ciber4    
+          repository: MZuleima/ciber4
+          token: ${{ secrets.GITHUB_TOKEN }}    
           run: |
             ls -al
