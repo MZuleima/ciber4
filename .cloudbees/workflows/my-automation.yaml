@@ -14,11 +14,6 @@ jobs:
         uses: cloudbees/checkout@v2
         with:
           provider: github
-          repository: MZuleima.ciber4
-        run: |
-          if [ -f prueba.java ]; then
-            echo "El archivo prueba.java existe en el repositorio."
-          else
-            echo "Error: No se encontró el archivo prueba.java en el repositorio."
-            exit 1
-          fi
+          repository: MZuleima/ciber4    
+          run: |
+            ls -al
