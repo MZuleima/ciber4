@@ -6,16 +6,14 @@ on:
   push:
     branches:
       - '**'
-
 jobs:
   build:
     steps:
       - name: Checkout Repository
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
+        uses: cloudbees/checkout@v2
         with:
-          provider: github
           repository: MZuleima/ciber4
-          token: secrets.MI_TOKEN_GITHUB
-          run: |
-            ls -al
+          token: ${{ secrets.MI_TOKEN_GITHUB }}
+
+        run: |
+          ls -al
