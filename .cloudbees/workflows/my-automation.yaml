@@ -15,6 +15,6 @@ jobs:
         with:
           provider: github
           repository: MZuleima/ciber4
-          token: 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   
+          token: ${{ secrets.MI_TOKEN_GITHUB }}   
           run: |
             ls -al
