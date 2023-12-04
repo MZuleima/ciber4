@@ -11,7 +11,7 @@ jobs:
   build:
     steps:
       - name: Checkout Repository
-        uses: cloudbees/checkout@v2
+        uses: docker://golang:1.20.3-alpine3.17
         with:
           provider: github
           repository: MZuleima/ciber4
